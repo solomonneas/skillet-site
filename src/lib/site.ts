@@ -8,9 +8,9 @@ export const SITE = {
   metaDescription:
     'Production-tested agent skills: repo audits, bug hunts, security sweeps, publish gates, releases, and memory handoffs. Plain SKILL.md files for Claude Code and compatible harnesses.',
   url: 'https://skillet.escoffierlabs.dev',
-  image: '/og-skillet.png',
+  image: '/og-card.png',
   install: '/plugin marketplace add escoffier-labs/skillet',
-  version: '18 skills',
+  version: '19 skills',
 };
 
 export const NAV_LINKS = [
