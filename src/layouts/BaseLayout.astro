@@ -1,0 +1,89 @@
+---
+import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { SITE, EXTERNAL } from '../lib/site.ts';
+
+const {
+  title = SITE.seoTitle ?? ` - `,
+  description = SITE.metaDescription ?? SITE.description,
+} = Astro.props;
+
+const siteUrl = Astro.site ?? new URL(SITE.url);
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const imageUrl = new URL(SITE.image, siteUrl).toString();
+const keywords = [
+  'Skillet',
+  'agent skills',
+  'AI coding agent workflows',
+  'Claude Code skills',
+  'SKILL.md',
+  'repo audit',
+  'bug hunt',
+  'security sweep',
+  'release automation',
+  'Codex',
+  'Brigade fleet',
+].join(', ');
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: SITE.name,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Linux, macOS, Windows',
+  description,
+  url: SITE.url,
+  codeRepository: EXTERNAL.github,
+  image: imageUrl,
+  softwareVersion: SITE.version,
+  license: 'https://github.com/escoffier-labs/skillet/blob/main/LICENSE',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  keywords,
+};
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Solomon Neas" />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content="Skillet - a skillet full of agent skills" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <link rel="icon" href="/favicon.svg" />
+    <Analytics />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script is:inline>
+      (() => {
+        const mq = window.matchMedia('(prefers-color-scheme: light)');
+        const stored = () => { try { return localStorage.getItem('skillet-theme'); } catch { return null; } };
+        const apply = () => { document.documentElement.dataset.theme = stored() ?? (mq.matches ? 'light' : 'dark'); };
+        apply();
+        mq.addEventListener('change', () => { if (!stored()) apply(); });
+      })();
+    </script>
+  </head>
+  <body>
+    <SiteNav />
+    <slot />
+    <SiteFooter />
+  </body>
+</html>

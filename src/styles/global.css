@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@import "@fontsource-variable/inter";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+@import "@fontsource/caveat/600.css";
+
+/* Dark: the ledger. Ink ground, amber accent, cream receipt. */
+:root, [data-theme="dark"] {
+  --bg: #0d1014;
+  --bg-panel: #11161c;
+  --bg-panel-2: #0f1318;
+  --text: #dde3ea;
+  --text-muted: #9aa4b2;
+  --text-dim: #7d8590;
+  --accent: #e0a45c;
+  --hairline: #1e242c;
+  --hairline-strong: #2a323d;
+  --term-bg: #0f1318;
+  --receipt-paper: #f5f2ea;
+  --receipt-ink: #1d1a14;
+  --receipt-dim: #8a7c64;
+  --receipt-rule: #b9b2a4;
+  --on-accent: #0d1014;
+}
+
+/* Light: the receipt paper. Cream ground, ink text, deepened amber. */
+[data-theme="light"] {
+  --bg: #f5f2ea;
+  --bg-panel: #fffdf8;
+  --bg-panel-2: #f0ece1;
+  --text: #1d1a14;
+  --text-muted: #5c5448;
+  --text-dim: #857b6c;
+  --accent: #a8703a;
+  --hairline: #ddd5c4;
+  --hairline-strong: #c9bfa9;
+  --term-bg: #fffdf8;
+  --receipt-paper: #ffffff;
+  --receipt-ink: #1d1a14;
+  --receipt-dim: #8a7c64;
+  --receipt-rule: #d8d2c4;
+  --on-accent: #f5f2ea;
+}
+
+html { background: var(--bg); color: var(--text); }
+body { font-family: "Inter Variable", ui-sans-serif, system-ui, sans-serif; margin: 0; }
+.font-display {
+  font-family: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.font-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+.kicker {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+a { color: inherit; }
+
+/* Section heading rule, shared with the rest of the family */
+.section-rule {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.section-rule::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--hairline);
+}
+
+/* Feature / shelf cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.shelf-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 1.1rem 1.2rem 1rem;
+}
+.shelf-card h3 {
+  font-family: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--text);
+}
+.shelf-card p { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--text-muted); }
+
+/* Source -> stream -> sink flow */
+.pantry-flow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: stretch;
+}
+@media (max-width: 767px) { .pantry-flow { grid-template-columns: 1fr; } }
+.flow-node {
+  background: var(--bg-panel);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 1.1rem 1.2rem;
+}
+.flow-node h3 {
+  font-family: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+  color: var(--text);
+}
+.flow-node ul { margin: 0; padding: 0; list-style: none; }
+.flow-node li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  padding: 0.3rem 0;
+  border-top: 1px solid var(--hairline);
+}
+.flow-node li:first-child { border-top: none; }
+.flow-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0 0.4rem;
+  text-align: center;
+}
+.flow-link .arrow { color: var(--accent); font-size: 1.4rem; }
+.flow-link .label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  max-width: 11rem;
+}
+@media (max-width: 767px) { .flow-link .arrow { transform: rotate(90deg); } }
+
+/* Command reference table */
+.cmd-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.cmd-table th {
+  text-align: left;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 0 1rem 0.6rem 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.cmd-table td {
+  padding: 0.6rem 1rem 0.6rem 0;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--text-muted);
+  vertical-align: top;
+}
+.cmd-table td:first-child {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--text);
+  white-space: nowrap;
+}

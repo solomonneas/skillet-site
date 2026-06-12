@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CopyCommand from '../components/CopyCommand.astro';
+import SkilletHero from '../components/SkilletHero.astro';
+import { SITE, EXTERNAL } from '../lib/site.ts';
+
+const TRIO = [
+  {
+    name: 'line-check',
+    desc: 'The flagship. A chef’s line check for your repo: seven stations scored (docs, agent-readiness, tests/CI, hygiene, structure, release hygiene, TODO mining) and a backlog sorted by impact relative to effort.',
+  },
+  {
+    name: 'bug-hunt',
+    desc: 'Correctness sweep across five lenses with mandatory adversarial verification. Only bugs that survive a refutation attempt make the report, each with a concrete trigger.',
+  },
+  {
+    name: 'security-sweep',
+    desc: 'Defensive security audit: secrets in tree and history, dependency CVEs, injection surfaces, authn/authz, exposure. Every finding ships with its remediation.',
+  },
+];
+
+const LINE_CHAIN = [
+  { name: 'mise', sub: 'idea to approved spec' },
+  { name: 'recipe', sub: 'spec to executable plan' },
+  { name: 'fire', sub: 'plan to shipped code' },
+];
+
+const LINE_SUPPORT = [
+  { name: 'taste', desc: 'Test-first discipline that survives pressure. The failing test is watched failing before any implementation. Nothing leaves the kitchen untasted.' },
+  { name: 'refire', desc: 'Root-cause-first debugging. Find out why the plate came back before cooking it again; three failed fixes means question the architecture.' },
+  { name: 'sendback', desc: 'Review feedback with rigor instead of reflex: verify each claim against the codebase, push back with evidence, skip the performative agreement.' },
+  { name: 'stations', desc: 'The expeditor’s fan-out for parallel agents: cluster by root cause, check write sets, give each station a complete ticket, taste the integrated result.' },
+  { name: 'pressure-test', desc: 'Drives a plan to explicit decisions before anyone builds. Sous mode makes the reversible calls while you are AFK and leaves an auditable transcript.' },
+  { name: 'expedite', desc: 'Takes an audit backlog and drives it to done: highest leverage first, one verified change at a time, anything destructive parked for you.' },
+];
+
+const DOOR = [
+  { name: 'pass', desc: 'The gate before a pull request leaves your hands: real fix, tested, one concern, self-reviewed diff, and a PR body you approved.' },
+  { name: 'plate', desc: 'The last look before prose goes public: scrubs hostnames, private IPs, leaked paths, and authorship tells from posts, PR bodies, and release notes.' },
+  { name: 'publish-readiness', desc: 'The gate before a repo goes public: working-tree and git-history leak scans, hygiene checks, and the history-rewrite recipe when something already leaked.' },
+  { name: 'release-cut', desc: 'Changelog roll-up, semver bump, tag, GitHub release, drafted announcement. Releases on request, never per feature.' },
+  { name: 'memory-handoff', desc: 'Ends a session by writing durable knowledge into a structured handoff a memory owner can review and file. Pairs with Brigade, works standalone.' },
+  { name: 'skillify', desc: 'The meta-skill: turn a script, runbook, or repeated workflow into a new skill, with a fresh-agent test before you call it done.' },
+];
+
+const INSTALLS = [
+  {
+    title: 'Claude Code',
+    lines: ['/plugin marketplace add escoffier-labs/skillet', '/plugin install skillet@skillet'],
+    note: 'Two commands in any session. Skills load on demand.',
+  },
+  {
+    title: 'Any SKILL.md harness',
+    lines: ['git clone https://github.com/escoffier-labs/skillet', 'cp -r skillet/skillet/skills/line-check <your-skills-dir>/'],
+    note: 'The skills are plain SKILL.md files. Copy what you want.',
+  },
+  {
+    title: 'Per repo',
+    lines: ['cp -r skillet/skillet/skills/taste .claude/skills/'],
+    note: 'Drop individual skills into a repo to share them with everyone who works on it.',
+  },
+];
+---
+<BaseLayout>
+  <main>
+    <header class="hero relative overflow-hidden">
+      <div class="hero-glow absolute inset-0" aria-hidden="true"></div>
+      <div class="relative px-6 md:px-10 py-20 max-w-3xl mx-auto text-center">
+        <p class="kicker">[ SKILLET &middot; {SITE.version} ]</p>
+        <h1 class="font-display text-5xl md:text-6xl leading-[1.04] mt-3">
+          A skillet full of <span style="color: var(--accent);">agent skills.</span>
+        </h1>
+        <p class="text-lg mt-4 max-w-xl mx-auto" style="color: var(--text-muted);">
+          Production-tested workflows for auditing, improving, and shipping repos with AI coding
+          agents. Repo audits with leverage-sorted backlogs, bug hunts that survive refutation,
+          security sweeps, publish gates, releases, and memory handoffs. Plain SKILL.md files;
+          every one extracted from a real workflow that broke the manual way.
+        </p>
+        <div class="flex flex-wrap gap-3 mt-7 items-center justify-center">
+          <CopyCommand command={SITE.install} />
+          <a href={EXTERNAL.github} class="text-sm font-semibold px-4 py-2 rounded-md" style="background: var(--accent); color: var(--on-accent);">View on GitHub &rarr;</a>
+        </div>
+        <p class="text-sm mt-2" style="color: var(--text-dim);">{SITE.subtitle}</p>
+        <div class="mt-12 flex justify-center">
+          <SkilletHero />
+        </div>
+      </div>
+    </header>
+
+    <section id="audit-trio" class="px-6 md:px-10 py-14 max-w-6xl mx-auto">
+      <div class="section-rule mb-3"><span class="kicker">[ 01 &middot; THE AUDIT TRIO ]</span></div>
+      <p class="max-w-2xl mb-8" style="color: var(--text-muted);">
+        Three skills, one report contract. Run any of them alone or all three over time; the
+        findings compose into a single leverage-sorted backlog. The trio is read-only by design,
+        and <span class="font-mono" style="color: var(--accent);">expedite</span> is the separate,
+        opt-in step that drives the backlog to done.
+      </p>
+      <div class="card-grid">
+        {TRIO.map((s) => (
+          <div class="shelf-card">
+            <h3 class="font-mono" style="color: var(--accent);">/{s.name}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-5 text-sm" style="color: var(--text-muted);">
+        Report contract: <a href={EXTERNAL.reportFormat} style="color: var(--accent);">docs/audit-report-format.md &rarr;</a>
+      </p>
+    </section>
+
+    <section id="the-line" class="px-6 md:px-10 py-14 max-w-6xl mx-auto">
+      <div class="section-rule mb-3"><span class="kicker">[ 02 &middot; THE LINE ]</span></div>
+      <p class="max-w-2xl mb-8" style="color: var(--text-muted);">
+        The daily build chain: design before code, plan before execution, execution with the
+        checkboxes ticked live. Each handoff is written so a fresh session or a zero-context
+        engineer can pick it up.
+      </p>
+      <div class="chain mb-10">
+        {LINE_CHAIN.map((s, i) => (
+          <Fragment>
+            <div class="chain-node">
+              <span class="font-mono" style="color: var(--accent);">/{s.name}</span>
+              <span class="chain-sub">{s.sub}</span>
+            </div>
+            {i < LINE_CHAIN.length - 1 && <span class="chain-arrow" aria-hidden="true">&rarr;</span>}
+          </Fragment>
+        ))}
+      </div>
+      <div class="card-grid">
+        {LINE_SUPPORT.map((s) => (
+          <div class="shelf-card">
+            <h3 class="font-mono" style="color: var(--accent);">/{s.name}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="out-the-door" class="px-6 md:px-10 py-14 max-w-6xl mx-auto">
+      <div class="section-rule mb-3"><span class="kicker">[ 03 &middot; OUT THE DOOR ]</span></div>
+      <p class="max-w-2xl mb-8" style="color: var(--text-muted);">
+        Nothing leaves the kitchen unchecked: gates for pull requests, public prose, repo
+        publication, releases, and the knowledge a session leaves behind.
+      </p>
+      <div class="card-grid">
+        {DOOR.map((s) => (
+          <div class="shelf-card">
+            <h3 class="font-mono" style="color: var(--accent);">/{s.name}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="install" class="px-6 md:px-10 py-14 max-w-6xl mx-auto">
+      <div class="section-rule mb-3"><span class="kicker">[ 04 &middot; INSTALL ]</span></div>
+      <p class="max-w-2xl mb-8" style="color: var(--text-muted);">
+        Skills are plain markdown. Install everything through the Claude Code marketplace, or copy
+        individual SKILL.md folders into any compatible harness.
+      </p>
+      <div class="card-grid">
+        {INSTALLS.map((m) => (
+          <div class="shelf-card">
+            <h3>{m.title}</h3>
+            <pre class="install-pre font-mono">{m.lines.join('\n')}</pre>
+            <p>{m.note}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 max-w-2xl text-sm" style="color: var(--text-muted);">
+        Then ask naturally ("audit this repo", "is this safe to publish", "cut a release") or
+        invoke directly: <span class="font-mono" style="color: var(--accent);">/line-check</span>,
+        <span class="font-mono" style="color: var(--accent);">/security-sweep</span>,
+        <span class="font-mono" style="color: var(--accent);">/pressure-test</span>.
+      </p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .hero-glow {
+    background: radial-gradient(ellipse 50% 55% at 50% 28%, color-mix(in srgb, var(--accent) 7%, transparent) 0%, transparent 70%);
+  }
+  .chain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .chain-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    border: 1px solid var(--hairline);
+    background: var(--bg-panel);
+    border-radius: 6px;
+    padding: 0.8rem 1.4rem;
+  }
+  .chain-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .chain-arrow {
+    color: var(--accent);
+    font-size: 1.3rem;
+  }
+  .install-pre {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: var(--term-bg);
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    padding: 0.6rem 0.7rem;
+    color: var(--text);
+  }
+</style>

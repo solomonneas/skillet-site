@@ -1,0 +1,15 @@
+---
+import { SITE, EXTERNAL } from '../lib/site.ts';
+---
+<footer class="px-6 md:px-10 py-10 border-t mt-20 text-sm" style="border-color: var(--hairline); color: var(--text-muted);">
+  <div class="flex flex-wrap gap-6 items-center">
+    <span class="font-mono font-medium" style="color: var(--text);">SKILLET<span style="color: var(--accent);">_</span></span>
+    <a href={EXTERNAL.github}>GitHub</a>
+    <a href={EXTERNAL.releases}>Releases</a>
+    <a href={EXTERNAL.reportFormat}>Report format</a>
+    <a href={EXTERNAL.brigade}>Brigade</a>
+    <a href={EXTERNAL.cookbook}>Cookbook</a>
+    <span class="flex-1"></span>
+    <span class="font-mono">{SITE.version} · MIT</span>
+  </div>
+</footer>

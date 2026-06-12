@@ -1,0 +1,127 @@
+---
+const SIZZLING = [
+  { name: 'line-check', tilt: -4 },
+  { name: 'refire', tilt: 3 },
+  { name: 'mise', tilt: -2 },
+  { name: 'release-cut', tilt: 5 },
+];
+---
+<figure class="skillet-scene" aria-label="A cast-iron skillet, seen from above, with skill cards sizzling in the pan">
+  <div class="pan">
+    <div class="pan-wall" aria-hidden="true"></div>
+    <div class="pan-floor" aria-hidden="true"></div>
+    <div class="pan-chips">
+      {SIZZLING.map((s) => (
+        <span class="chip" style={`--tilt: ${s.tilt}deg`}>{s.name}</span>
+      ))}
+    </div>
+    <div class="pan-handle" aria-hidden="true"><span class="handle-hole"></span></div>
+  </div>
+  <figcaption class="skillet-cap font-mono">eighteen skills, seasoned in production &middot; grab the handle</figcaption>
+</figure>
+
+<style>
+  .skillet-scene {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem;
+  }
+  .pan {
+    position: relative;
+    width: 17rem;
+    height: 17rem;
+  }
+  /* Outer cast-iron wall. */
+  .pan-wall {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.14), transparent 45%),
+      radial-gradient(circle at 70% 75%, rgba(0, 0, 0, 0.45), transparent 60%),
+      #23262a;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5), inset 0 2px 3px rgba(255, 255, 255, 0.08);
+  }
+  [data-theme='light'] .pan-wall {
+    box-shadow: 0 14px 30px rgba(60, 50, 30, 0.35), inset 0 2px 3px rgba(255, 255, 255, 0.1);
+  }
+  /* Inner cooking surface, slightly seasoned sheen. */
+  .pan-floor {
+    position: absolute;
+    inset: 9%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.07), transparent 50%),
+      radial-gradient(circle at 60% 70%, rgba(224, 164, 92, 0.06), transparent 55%),
+      #1a1d20;
+    box-shadow: inset 0 6px 18px rgba(0, 0, 0, 0.7), inset 0 -2px 6px rgba(255, 255, 255, 0.03);
+  }
+  /* The handle. */
+  .pan-handle {
+    position: absolute;
+    top: 50%;
+    left: 96%;
+    width: 8.5rem;
+    height: 2.5rem;
+    transform: translateY(-50%);
+    border-radius: 0 1.4rem 1.4rem 0;
+    background:
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent 40%, rgba(0, 0, 0, 0.4)),
+      #23262a;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.9rem;
+  }
+  .handle-hole {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+  }
+  /* Skill chips sizzling in the pan. */
+  .pan-chips {
+    position: absolute;
+    inset: 14%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 0.5rem;
+    z-index: 1;
+  }
+  .chip {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-weight: 500;
+    font-size: 0.72rem;
+    background: var(--receipt-paper);
+    color: var(--receipt-ink);
+    padding: 0.3rem 0.55rem;
+    border-radius: 2px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transform: rotate(var(--tilt));
+    transition: transform 0.25s ease;
+  }
+  .chip:hover { transform: rotate(0deg) translateY(-2px); }
+  @media (prefers-reduced-motion: reduce) {
+    .chip, .chip:hover { transition: none; transform: rotate(var(--tilt)); }
+  }
+  .skillet-cap {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    /* keep the caption clear of the handle overhang */
+    margin-right: 4rem;
+  }
+  @media (max-width: 640px) {
+    .pan { width: 13rem; height: 13rem; }
+    .pan-handle { width: 5.5rem; height: 2rem; }
+    .skillet-cap { margin-right: 2rem; }
+  }
+</style>

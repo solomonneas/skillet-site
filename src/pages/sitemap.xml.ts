@@ -1,0 +1,16 @@
+import { SITE } from '../lib/site.ts';
+
+export async function GET({ site }: { site?: URL }) {
+  const base = site ?? new URL(SITE.url);
+  const urls = ['/']
+    .map((path) => {
+      const loc = new URL(path, base).toString();
+      return ['  <url>', `    <loc>${loc}</loc>`, '    <changefreq>weekly</changefreq>', '  </url>'].join('\n');
+    })
+    .join('\n');
+
+  return new Response(
+    ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', urls, '</urlset>'].join('\n'),
+    { headers: { 'Content-Type': 'application/xml' } },
+  );
+}
