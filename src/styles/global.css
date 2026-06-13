@@ -20,7 +20,7 @@
   --term-bg: #0f1318;
   --receipt-paper: #f5f2ea;
   --receipt-ink: #1d1a14;
-  --receipt-dim: #8a7c64;
+  --receipt-dim: #75694f;
   --receipt-rule: #b9b2a4;
   --on-accent: #0d1014;
 }
@@ -39,7 +39,7 @@
   --term-bg: #fffdf8;
   --receipt-paper: #ffffff;
   --receipt-ink: #1d1a14;
-  --receipt-dim: #8a7c64;
+  --receipt-dim: #75694f;
   --receipt-rule: #d8d2c4;
   --on-accent: #f5f2ea;
 }
@@ -173,3 +173,7 @@ a { color: inherit; }
   color: var(--text);
   white-space: nowrap;
 }
+
+/* a11y: inline accent-colored links get an underline so they are not
+   distinguishable by color alone (WCAG 1.4.1). Accent-background buttons keep color: var(--on-accent), so they are unaffected. */
+a[style*="color: var(--accent)"] { text-decoration: underline; text-underline-offset: 2px; }
