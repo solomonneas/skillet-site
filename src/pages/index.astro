@@ -33,6 +33,9 @@ const LINE_SUPPORT = [
   { name: 'stations', desc: 'The expeditor’s fan-out for parallel agents: cluster by root cause, check write sets, give each station a complete ticket, taste the integrated result.' },
   { name: 'pressure-test', desc: 'Drives a plan to explicit decisions before anyone builds. Sous mode makes the reversible calls while you are AFK and leaves an auditable transcript.' },
   { name: 'expedite', desc: 'Takes an audit backlog and drives it to done: highest leverage first, one verified change at a time, anything destructive parked for you.' },
+  { name: 'demi', desc: 'The simplicity gate before building: climb the ladder from existing behavior to the standard library to one local change before writing new infrastructure, without cutting the load-bearing checks.' },
+  { name: 'reduce', desc: 'Behavior-preserving simplification of the code you just changed: lock behavior with characterization tests, then boil off nesting, dead code, and duplication one category at a time.' },
+  { name: 'special', desc: 'The opportunity-finding counterpart to the audit trio: walks the repo for what is possible, not what is broken, and proposes evidence-grounded features sorted by leverage.' },
 ];
 
 const DOOR = [
@@ -42,6 +45,7 @@ const DOOR = [
   { name: 'release-cut', desc: 'Changelog roll-up, semver bump, tag, GitHub release, drafted announcement. Releases on request, never per feature.' },
   { name: 'memory-handoff', desc: 'Ends a session by writing durable knowledge into a structured handoff a memory owner can review and file. Pairs with Brigade, works standalone.' },
   { name: 'skillify', desc: 'The meta-skill: turn a script, runbook, or repeated workflow into a new skill, with a fresh-agent test before you call it done.' },
+  { name: 'brigade-handoffs', desc: 'Sets up and checks Brigade handoff inboxes for repos and workspaces: linted local drafts, a reviewed pending queue, and canonical memory changes kept review-gated.' },
 ];
 
 const INSTALLS = [
