@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
+import CloudflareAnalytics from '../components/CloudflareAnalytics.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Seo from '../components/Seo.astro';
@@ -43,6 +44,7 @@ const jsonLd = graph([
     <Seo siteName={SITE.name} title={title} description={description} keywords={keywords} jsonLd={jsonLd} />
     <link rel="icon" href="/favicon.svg" />
     <Analytics />
+    <CloudflareAnalytics />
     <script is:inline>
       (() => {
         const mq = window.matchMedia('(prefers-color-scheme: light)');
