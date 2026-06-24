@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://agentpantry.escoffierlabs.dev',
+  site: 'https://skillet.escoffierlabs.dev',
   output: 'static',
   vite: { plugins: [tailwindcss()] },
 });

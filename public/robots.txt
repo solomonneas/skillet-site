@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://agentpantry.escoffierlabs.dev/sitemap.xml
+Sitemap: https://skillet.escoffierlabs.dev/sitemap.xml
