@@ -10,7 +10,7 @@ export const SITE = {
   url: 'https://skillet.escoffierlabs.dev',
   image: '/og-card.png',
   install: '/plugin marketplace add escoffier-labs/skillet',
-  version: '25 skills',
+  version: '29 skills',
 };
 
 export const NAV_LINKS = [
