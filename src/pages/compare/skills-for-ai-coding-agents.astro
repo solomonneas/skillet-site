@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CopyCommand from '../../components/CopyCommand.astro';
+import { SITE, EXTERNAL } from '../../lib/site.ts';
+
+const title = 'Production-tested skills for auditing, improving, and shipping with AI coding agents';
+const description =
+  'Prompting an agent ad hoc is inconsistent. Skillet is a set of reusable, production-tested skills that give your coding agent a repeatable way to audit, improve, and ship repos.';
+
+const COMPARE = [
+  {
+    row: 'Repeatable across sessions',
+    skillet: 'Yes. Each workflow is a named skill the agent loads on demand, identical every run.',
+    prompt: 'No. You re-type or re-paste the instructions each session, and they drift.',
+  },
+  {
+    row: 'Lives with the repo or harness',
+    skillet: 'Yes. Plain SKILL.md files you commit to a repo or drop into any compatible harness.',
+    prompt: 'No. The instructions live in your head, a scratch doc, or chat history.',
+  },
+  {
+    row: 'Shared across a team',
+    skillet: 'Yes. Commit a skill folder and everyone who works the repo gets the same workflow.',
+    prompt: 'Hard. Each person carries their own version of the prompt.',
+  },
+  {
+    row: 'Encodes a multi-step workflow',
+    skillet: 'Yes. An audit, a publish gate, or a release roll-up runs the same defined steps in order.',
+    prompt: 'You can describe steps, but nothing enforces the order or that they all ran.',
+  },
+  {
+    row: 'Adversarial / verification discipline',
+    skillet: 'Built into skills like bug-hunt and check, so claims get refuted before they are reported.',
+    prompt: 'Only if you remember to ask for it, every time.',
+  },
+  {
+    row: 'Good for a true one-off',
+    skillet: 'Overkill. A skill is worth writing only when you will repeat the workflow.',
+    prompt: 'Best fit. A direct prompt is faster when you will never do it again.',
+  },
+  {
+    row: 'Portable between agents',
+    skillet: 'Yes. SKILL.md is plain markdown; copy it into Claude Code or any SKILL.md harness.',
+    prompt: 'Tied to wherever you happened to type it.',
+  },
+];
+
+const FAQ = [
+  {
+    q: 'Is this the cookware skillet?',
+    a: 'No. This Skillet is a collection of skills for AI coding agents, where a skill is a reusable workflow written as a SKILL.md file. The kitchen naming is a theme, not the product. If you came looking for a frying pan, this is not it.',
+  },
+  {
+    q: 'How is a skill different from a saved prompt or a snippet?',
+    a: 'A saved prompt is text you paste back in and adapt by hand. A skill is a named, structured workflow the agent loads on demand and runs the same way every time. It can define ordered steps, verification gates, and a report format, so the work is repeatable rather than reconstructed from memory each session.',
+  },
+  {
+    q: 'Do I have to use Claude Code?',
+    a: 'No. Skillet installs cleanly through the Claude Code plugin marketplace, but the skills are plain SKILL.md folders. You can copy individual skills into any harness that reads SKILL.md, or drop one into a repo under .claude/skills/ to share it with everyone working that repo.',
+  },
+];
+---
+<BaseLayout title={title} description={description}>
+  <main>
+    <section class="px-6 md:px-10 pt-16 pb-10 max-w-3xl mx-auto">
+      <p class="kicker">[ COMPARE &middot; SKILLS VS AD HOC PROMPTING ]</p>
+      <h1 class="font-display text-4xl md:text-5xl leading-[1.06] mt-3">
+        Skills for AI coding agents, instead of <span style="color: var(--accent);">re-explaining yourself.</span>
+      </h1>
+      <p class="text-lg mt-5" style="color: var(--text-muted);">
+        If you want your coding agent to audit, improve, and ship repos the same way every time, give it
+        skills rather than fresh prompts. Skillet is a set of reusable, production-tested skills (named
+        workflows written as plain SKILL.md files) that an agent loads on demand. You write the workflow
+        once, commit it, and the agent runs it the same way next session instead of you re-explaining the
+        steps. For a true one-off you will never repeat, a direct prompt is still the right tool.
+      </p>
+    </section>
+
+    <section class="px-6 md:px-10 py-12 max-w-3xl mx-auto">
+      <div class="section-rule mb-3"><h2 class="kicker m-0">[ 01 &middot; THE PROBLEM ]</h2></div>
+      <p style="color: var(--text-muted);">
+        Ad hoc prompting is inconsistent. The first time you ask an agent to audit a repo or harden a post
+        for publication, you spell out what you want: the steps, the checks, the format. The next session it
+        is gone, so you reconstruct it from memory, slightly differently, and you skip the step you forgot.
+        Quality swings run to run because the workflow lives in your head, not in the repo. The same goes for
+        a teammate, who carries their own version of the same prompt. The work is real and repeated, but
+        nothing captures it, so you pay the explaining cost every time.
+      </p>
+    </section>
+
+    <section class="px-6 md:px-10 py-12 max-w-4xl mx-auto">
+      <div class="section-rule mb-3"><h2 class="kicker m-0">[ 02 &middot; SKILLS VS ONE-OFF PROMPTS ]</h2></div>
+      <p class="max-w-2xl mb-7" style="color: var(--text-muted);">
+        The honest comparison is not against another product, it is against what you do now: one-off prompts
+        and copy-pasted instructions. This compares them on concrete capabilities, not numbers.
+      </p>
+      <div class="table-wrap">
+        <table class="cmd-table">
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Skillet (a committed skill)</th>
+              <th>One-off prompt / pasted instructions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {COMPARE.map((r) => (
+              <tr>
+                <td>{r.row}</td>
+                <td>{r.skillet}</td>
+                <td>{r.prompt}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-6 text-sm" style="color: var(--text-muted);">
+        Skills do not replace good tools. Skillet's security-sweep calls out leaked secrets and runs
+        existing scanners like <span class="font-mono">gitleaks</span> rather than reimplementing them;
+        a bug-hunt still leans on <span class="font-mono">grep</span> and your test runner; a verification
+        skill can drive <span class="font-mono">Playwright</span> if that is what the check needs. The skill
+        is the repeatable workflow around those tools, not a substitute for them. Where a focused tool is
+        the right answer, use the focused tool.
+      </p>
+    </section>
+
+    <section class="px-6 md:px-10 py-12 max-w-3xl mx-auto">
+      <div class="section-rule mb-3"><h2 class="kicker m-0">[ 03 &middot; WHEN TO USE IT, WHEN YOU DON'T ]</h2></div>
+      <div class="card-grid two">
+        <div class="shelf-card">
+          <h3 style="color: var(--accent);">Use a skill when</h3>
+          <p>
+            You have run the same workflow more than once: auditing repos, hunting correctness bugs,
+            scrubbing prose before it goes public, gating a pull request, or rolling up a release. Anything
+            you want done the same way every session, shared across a team, or portable between agents
+            belongs in a skill.
+          </p>
+        </div>
+        <div class="shelf-card">
+          <h3 style="color: var(--accent);">You do not need this when</h3>
+          <p>
+            It is a one-off you will never repeat. If you need to rename one function, answer one question
+            about a file, or run a single throwaway transformation, a direct prompt is faster and there is
+            nothing to capture. Writing a skill for that is overhead with no payoff. Reach for skills when
+            repetition shows up, not before.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 md:px-10 py-12 max-w-3xl mx-auto">
+      <div class="section-rule mb-3"><h2 class="kicker m-0">[ 04 &middot; FAQ ]</h2></div>
+      <div class="faq">
+        {FAQ.map((f) => (
+          <div class="faq-item">
+            <h3 class="faq-q font-display">{f.q}</h3>
+            <p class="faq-a" style="color: var(--text-muted);">{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="px-6 md:px-10 py-14 max-w-3xl mx-auto">
+      <div class="section-rule mb-3"><h2 class="kicker m-0">[ 05 &middot; INSTALL ]</h2></div>
+      <p class="mb-6" style="color: var(--text-muted);">
+        Skillet is open source (MIT). Install everything through the Claude Code plugin marketplace, then ask
+        naturally ("audit this repo", "is this safe to publish") or invoke a skill directly.
+      </p>
+      <div class="flex flex-wrap gap-3 items-center">
+        <CopyCommand command={SITE.install} />
+        <a href="/" class="text-sm font-semibold px-4 py-2 rounded-md" style="background: var(--accent); color: var(--on-accent);">See all the skills &rarr;</a>
+      </div>
+      <p class="mt-5 text-sm" style="color: var(--text-muted);">
+        Prefer to read the source first? It is on
+        <a href={EXTERNAL.github} style="color: var(--accent);">GitHub &rarr;</a>
+      </p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .table-wrap { overflow-x: auto; }
+  .cmd-table th:not(:first-child),
+  .cmd-table td:not(:first-child) { white-space: normal; }
+  .cmd-table td:first-child { white-space: normal; }
+  .card-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 767px) { .card-grid.two { grid-template-columns: 1fr; } }
+  .faq { display: flex; flex-direction: column; gap: 1.4rem; }
+  .faq-item {
+    border: 1px solid var(--hairline);
+    background: var(--bg-panel);
+    border-radius: 8px;
+    padding: 1.1rem 1.3rem;
+  }
+  .faq-q { font-size: 1.05rem; margin: 0 0 0.4rem; }
+  .faq-a { margin: 0; font-size: 0.92rem; line-height: 1.6; }
+</style>
+</content>
+</invoke>
