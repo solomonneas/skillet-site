@@ -5,6 +5,7 @@ import CloudflareAnalytics from '../components/CloudflareAnalytics.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Seo from '../components/Seo.astro';
+import CommandPalette from '../components/islands/CommandPalette';
 import { SITE, EXTERNAL } from '../lib/site.ts';
 import { composeTitle, softwareApplicationLd, organizationLd, absoluteImage, graph } from '../lib/seo.ts';
 
@@ -60,6 +61,7 @@ const jsonLd = graph([
   </head>
   <body>
     <SiteNav />
+    <CommandPalette client:idle />
     <slot />
     <SiteFooter />
   </body>
