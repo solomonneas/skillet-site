@@ -177,3 +177,11 @@ a { color: inherit; }
 /* a11y: inline accent-colored links get an underline so they are not
    distinguishable by color alone (WCAG 1.4.1). Accent-background buttons keep color: var(--on-accent), so they are unaffected. */
 a[style*="color: var(--accent)"] { text-decoration: underline; text-underline-offset: 2px; }
+
+
+/* GitHub stars badge (shieldcn): show the mode that matches the theme toggle.
+   Default ground is dark, so the dark badge shows unless [data-theme="light"] is set. */
+.stars-badge-dark, .stars-badge-light { width: auto; }
+.stars-badge-light { display: none; }
+[data-theme="light"] .stars-badge-dark { display: none; }
+[data-theme="light"] .stars-badge-light { display: inline-block; }

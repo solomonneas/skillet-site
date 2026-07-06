@@ -22,6 +22,10 @@ export const NAV_LINKS = [
 
 export const EXTERNAL = {
   github: 'https://github.com/escoffier-labs/skillet',
+  stargazers: 'https://github.com/escoffier-labs/skillet/stargazers',
+  // Live shadcn-styled GitHub stars badge (shieldcn.dev). Two modes, swapped to match the theme toggle.
+  starsBadgeDark: 'https://shieldcn.dev/github/stars/escoffier-labs/skillet.svg?variant=secondary&mode=dark',
+  starsBadgeLight: 'https://shieldcn.dev/github/stars/escoffier-labs/skillet.svg?variant=secondary&mode=light',
   releases: 'https://github.com/escoffier-labs/skillet/releases',
   reportFormat: 'https://github.com/escoffier-labs/skillet/blob/main/docs/audit-report-format.md',
   brigade: 'https://brigade.tools',
